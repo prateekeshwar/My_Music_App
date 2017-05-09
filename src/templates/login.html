@@ -1,0 +1,30 @@
+<!--DOCTYPE html-->
+{% extends 'base.html' %}
+
+<html>
+    <head>
+        <!-- Is anyone getting tired of repeatedly entering the header over and over?? -->
+        <title>MY_MUSIC</title>
+    </head>
+
+    <body
+     {% block content %}
+        <div class='col-sm-6 col-sm-offset-3'>
+        <h1>Login to MY_MUSIC</h1>
+
+        <form id="login_form" method="post" action="" >
+            {% csrf_token %}
+             {{ login_form.as_p }}
+            Username:<br />
+            <input type="text" name="username" value="" size="50" /><br />
+            <br />
+            Password:<br />
+            <input type="password" name="password" value="" size="50" /><br />
+            <br />
+
+            <input type="submit" value="submit" />
+        </form>
+</div>
+ {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block head_title %}{{ instance.album_title }}|{{ block.super }}{% endblock %}
+<html>
+    <body>
+
+
+
+{% block content %}
+{% if user.is_authenticated %}
+   <div class='row'>
+<div class='col-sm-6 col-sm-offset-9'>
+<br/>
+<p><a href="/add_songs/" class='btn btn-primary' role='button'>Add Songs</a></p><br/>
+
+<p><a href="/update/{{ instance.id }}/" class='btn btn-primary' role='button'>Update Album</a></p><br/>
+
+<br/>
+</div>  
+</div>
+{% else %}
+    <div class='row'>
+<div class='col-sm-6 col-sm-offset-9'>
+<p><a href="/register/" class='btn btn-primary' role='button'>Register Here</a></p>
+</div>  
+<div class='col-sm-6 col-sm-offset-9'>
+<p><a href="/login/" class='btn btn-primary' role='button'>Login</a></p> 
+</div>    
+    </div>
+{% endif %}
+
+{% if messages %}
+<ul class="messages">
+{% for message in messages %}
+<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+    
+    
+ <div class='col-sm-6 col-sm-offset-3'>   
+{% if instance.album_logo %}
+ <img src='{{ instance.album_logo.url }}' class='img-responsive' style="width:400px;height:250px;" />
+ {% endif %}
+    <h1>{{ instance.album_title }} <small>{{ instance.artist }}|{{ instance.genre }}</small></h1>
+   
+ 
+ {% for song in song_list %}
+<a href='/song_player/{{ song.id }}/'  class='btn btn-primary' role='button'>PLAY {{ song.song_title }}</a><br/>
+
+{{ song.is_favourite }}<br/>
+{% endfor %}
+</div>
+{% endblock %}
+    </body>
+    
+    
+    
+    
+</html>
